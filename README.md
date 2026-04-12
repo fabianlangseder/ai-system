@@ -42,9 +42,11 @@ This repo is the backbone of a personal AI system. Cloud scheduled tasks (runnin
 └────────┘
     │
     ▼
-┌────────────────┐
-│ Obsidian (Mac) │  ← optional local sync via Obsidian Git plugin
-└────────────────┘
+┌────────────────┐   ┌─────────────────────────────┐
+│ Obsidian (Mac) │   │ VPS (Netcup)                │
+│ ← local sync  │   │ ← Claude Code for repo mgmt  │
+│   via Git      │   │   and ad-hoc automation      │
+└────────────────┘   └─────────────────────────────┘
 ```
 
 ### How scheduled tasks work
@@ -87,13 +89,10 @@ ai-system/
 │   ├── goals-current.md            ← Active goals
 │   └── advisor-system-prompt.md    ← Growth advisor persona
 │
-├── finances/                       ← PLANNED: Expense tracking
-│   ├── expenses-2026.md            ← Running expense log
-│   ├── monthly-reports/            ← Auto-generated summaries
-│   └── investment-notes.md         ← Research and calculations
-│
 └── README.md                       ← This file
 ```
+
+> **Finances:** Tracked via a dedicated native app (not in this repo).
 
 **Status key:** ACTIVE = scheduled tasks running, PLANNED = files may exist but no automation yet.
 
@@ -102,7 +101,7 @@ ai-system/
 ### For AI agents reading this repo
 
 - **System prompt files** (`*-system-prompt.md`): Read these first. They contain the persona, rules, knowledge base, and constraints for that domain. Follow the rules defined in them.
-- **Log files** (`training-log.md`, `expenses-2026.md`): Human-edited, append-only (newest entries at top). Never delete existing entries. Only add new entries if the human explicitly asks.
+- **Log files** (`training-log.md`): Human-edited, append-only (newest entries at top). Never delete existing entries. Only add new entries if the human explicitly asks.
 - **Program/plan files** (`program-current.md`, `goals-current.md`): Agent-updatable. When modifying, update the "Last updated" date and explain what changed in the "Notes from coach" section.
 - **Output folders** (`daily-coaching/`, `weekly-reviews/`, `newsletter-digests/`): Agent-written. Use the filename pattern shown. One file per period. Overwrite if re-running for the same date.
 - **Topics of interest** (`topics-of-interest.md`): Reference when filtering or prioritizing content. Respect the priority tiers.
@@ -150,19 +149,16 @@ Use this format for automated commits:
 ## How to interact with this system
 
 ### Log a workout
-Edit `fitness/training-log.md` — add a new entry at the top following the template format.
+Edit `fitness/training-log.md` — add a new entry at the top following the template format. Can also be done via Obsidian (Mac), GitHub mobile, or by telling Claude via Dispatch.
 
 ### Save a research note
 Add a markdown file to `second-brain/inbox/` with a descriptive filename.
-
-### Track an expense
-Add a line to `finances/expenses-2026.md` following the format: `| YYYY-MM-DD | amount | category | description |`
 
 ### Change training program
 Edit `fitness/program-current.md` directly, or ask Claude in chat to suggest changes.
 
 ### Ask for advice
-Open Claude.ai or use Dispatch from phone. Claude has memory of this system and can reference files when you mention them.
+Open Claude.ai, Claude Code, or use Dispatch from your phone. Claude has memory of this system and can reference files when you mention them.
 
 ## Tech stack
 
@@ -171,6 +167,7 @@ Open Claude.ai or use Dispatch from phone. Claude has memory of this system and 
 | Claude Pro | Chat, memory, Cowork, Dispatch, cloud scheduled tasks | $20/mo |
 | GitHub (private repo) | File storage, version history, native to scheduled tasks | Free |
 | Gmail (news.fabian@gmail.com) | Newsletter ingestion via connector | Free |
-| Obsidian + Git plugin | Local editing and reading (optional) | Free |
+| Obsidian + Git plugin | Local editing and reading on Mac | Free |
 | GitHub Pages | Hosting for web apps (investment calc, etc.) | Free |
+| VPS (Netcup) | Claude Code for repo management and ad-hoc automation | existing |
 | **Total** | | **$20/mo** |
